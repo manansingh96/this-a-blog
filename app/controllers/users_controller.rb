@@ -3,11 +3,14 @@
 # Users Controller
 class UsersController < ApplicationController
 
-  # before_action :set_user, only
+  before_action :set_user, only: %i[show]
 
   def show
-    set_user
     @articles = @user.articles
+  end
+
+  def index
+    @users = User.all
   end
 
   def new
@@ -22,7 +25,7 @@ class UsersController < ApplicationController
     set_user
     if @user.update(user_params)
       flash[:notice] = 'Account details updated'
-      redirect_to articles_path
+      redirect_to user_path(@user)
     else
       render 'edit'
     end
