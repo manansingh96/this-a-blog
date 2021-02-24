@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= render 'shared/errors', obj: @user%>
+      <%= form_with(model: @user, class: 'p-5 shadow bg-body rounded clearfix', local: true) do |f|%>
+        <div class="input-group row m-3">
+          <%= f.label :username, class: 'col-2 col-form-label' %><br/>
+          <div class="col-10">
+            <%= f.email_field :username, class: 'form-control shadow rounded' %>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+        </div>
+        <div class="input-group row m-3">
+          <%= f.label :email_id, class: 'col-2 col-form-label' %><br/>
+          <div class="col-10">
+            <%= f.text_field :email_id, class: 'form-control shadow rounded'%>
+          </div>
+        </div>
+        <div class="input-group row m-3">
+          <%= f.label :password, class: 'col-2 col-form-label' %><br/>
+          <div class="col-10">
+            <%= f.password_field :password, class: 'form-control shadow rounded'%>
+          </div>
+        </div>
+        <div class="btn-group float-end align-items-center" role="group">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
