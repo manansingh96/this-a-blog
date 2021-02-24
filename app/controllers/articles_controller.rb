@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
   def show; end
 
   def index
-    @articles = Article.all
+    @articles = Article.page(params[:page])
   end
 
   def new

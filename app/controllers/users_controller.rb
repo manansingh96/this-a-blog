@@ -6,11 +6,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show]
 
   def show
-    @articles = @user.articles
+    @page_num = params[:page]
+    @articles = @user.articles.page(@page_num)
   end
 
   def index
-    @users = User.all
+    @users = User.page(params[:page])
   end
 
   def new

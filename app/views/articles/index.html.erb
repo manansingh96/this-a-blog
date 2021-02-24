@@ -1,2 +1,8 @@
 <h1 class="text-center mt-4">Article Listings</h1>
+<div class="container pagination justify-content-center mt-4">
+  <%= paginate @articles %>
+</div>
 <%= render 'article' %>
+<div class="container pagination justify-content-center mt-4">
+  <%= paginate @articles %>
+</div>
