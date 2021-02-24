@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     set_user
     if @user.update(user_params)
       flash[:notice] = 'Account details updated'
-      redirect_to user_path(@user)
+      redirect_to @user
     else
       render 'edit'
     end
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "Welcome to the blog #{@user.username}, your account is created."
-      redirect_to articles_path
+      redirect_to @user
     else
       render 'new'
     end
