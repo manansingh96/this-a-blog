@@ -4,6 +4,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: %i[show edit update]
+  before_action :require_user, :account_owner?, only: %i[edit update destroy]
 
   def show
     @page_num = params[:page]
@@ -48,5 +49,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email_id, :password)
+  end
+
+  def account_owner?
+    if current_user != @user
+      flash[:notice] = 'You can only perform this action on your own account.'
+      redirect_to @user
+    end
   end
 end
