@@ -9,10 +9,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = Article.new(article_params)
+    @user = User.new(user_params)
     if @user.save
-      flash[:notice] = 'User account is created!'
-      redirect_to root_path
+      flash[:notice] = "Welcome to the blog #{@user.username}, your account is created."
+      redirect_to articles_path
     else
       render 'new'
     end

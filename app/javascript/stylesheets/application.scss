@@ -24,7 +24,7 @@
 .jumbo-bg::before{
   content:'';
   position:absolute;
-  background: linear-gradient(0deg, #00000038 30%, #ffffff44 100%);
+  background: -webkit-linear-gradient(90deg, #00000088 00%, #ffffff44 100%);
   width:100%;
   height:100%;
   z-index:-1;
