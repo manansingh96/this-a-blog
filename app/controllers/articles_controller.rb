@@ -4,7 +4,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy]
   before_action :require_user, except: %i[show index]
-  before_action :require_owner, only: %i[edit update destroy]
+  before_action :require_access, only: %i[edit update destroy]
 
   def show; end
 
@@ -54,10 +54,10 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :description)
   end
 
-  def require_owner
-    if current_user != @article.user
-      flash[:notice] = 'You can only perform this action on your own articles.'
-      redirect_to @article
-    end
+  def require_access
+    return unless current_user == @article.user && current_user.admin?
+
+    flash[:notice] = 'You can only perform this action on your own articles.'
+    redirect_to @article
   end
 end

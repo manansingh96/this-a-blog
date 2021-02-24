@@ -3,7 +3,7 @@
 # Users Controller
 class UsersController < ApplicationController
 
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :require_user, :account_owner?, only: %i[edit update destroy]
 
   def show
@@ -41,6 +41,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+    session[:user_id] = nil if @user == current_user
+    flash[:notice] = 'Account successfully deleted.'
+    if @user == current_user
+      redirect_back fallback_location: bloggers_path
+    else
+      redirect_to root_path
+    end
+  end
+
   private
 
   def set_user
@@ -52,7 +63,7 @@ class UsersController < ApplicationController
   end
 
   def account_owner?
-    if current_user != @user
+    if current_user != @user && !current_user.admin?
       flash[:notice] = 'You can only perform this action on your own account.'
       redirect_to @user
     end

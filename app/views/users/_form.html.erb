@@ -23,6 +23,7 @@
         </div>
         <div class="btn-group float-end align-items-center" role="group">
           <%= f.submit(@user.new_record? ? 'Sign up!' : 'Update Account', class: 'btn btn-primary')%>
+          <%= link_to 'Cancel Edit', :back, class: 'btn btn-outline-primary' %>
         </div>
       <% end %>
     </div>

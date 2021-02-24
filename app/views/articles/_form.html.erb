@@ -16,8 +16,8 @@
           </div>
         </div>
         <div class="btn-group float-end align-items-center" role="group">
-          <%= f.submit class: 'btn btn-primary' %>
-          <%= link_to 'Cancel Edit', articles_path, class: 'btn btn-outline-primary'%>
+          <%= f.submit @article.new_record? ? 'Create Article!' : 'Update Article', class: 'btn btn-primary' %>
+          <%= link_to 'Cancel Edit', :back, class: 'btn btn-outline-primary'%>
         </div>
       <% end %>
     </div>
