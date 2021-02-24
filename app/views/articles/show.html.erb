@@ -9,8 +9,10 @@
         <div class="card-body">
           <div class="card-text text-start"><%= simple_format(@article.description) %></div>
           <div class="btn-group" role="group">
-            <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-primary', type:'button' %>
-            <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you shure?' }, class: 'btn btn-primary', type:'button' %>
+            <% if logged_in? && @article.user == current_user %>
+              <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-primary', type:'button' %>
+              <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you shure?' }, class: 'btn btn-primary', type:'button' %>
+            <% end %>
             <%= link_to 'Return to Articles List', articles_path, class: 'btn btn-primary', type:'button'  %>
           </div>
         </div>

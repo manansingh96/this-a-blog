@@ -3,7 +3,7 @@
 # Users Controller
 class UsersController < ApplicationController
 
-  before_action :set_user, only: %i[show]
+  before_action :set_user, only: %i[show edit update]
 
   def show
     @page_num = params[:page]
@@ -18,12 +18,9 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit
-    set_user
-  end
+  def edit; end
 
   def update
-    set_user
     if @user.update(user_params)
       flash[:notice] = 'Account details updated'
       redirect_to @user
@@ -35,6 +32,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "Welcome to the blog #{@user.username}, your account is created."
       redirect_to @user
     else

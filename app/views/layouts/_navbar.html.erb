@@ -9,23 +9,34 @@
         <li class="nav-item">
           <%= link_to 'Bloggers', bloggers_path, class: 'nav-link' %>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Articles
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to 'Article Listings', articles_path, class: 'dropdown-item' %>
-            <%= link_to 'Create New Article', new_article_path, class: 'dropdown-item' %>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'About', about_path, class: 'nav-link' %>
-        </li>
+        <% if logged_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Articles
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><%= link_to 'Create New Article', new_article_path, class: 'dropdown-item' %></li>
+              <hr/>
+              <li><%= link_to 'View Articles', articles_path, class: 'dropdown-item' %></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              [<%= current_user.username %>]
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><%= link_to 'View Profile', user_path(current_user), class: 'dropdown-item'%></li>
+              <li><%= link_to 'Edit Profile', edit_user_path(current_user), class: 'dropdown-item' %></li>
+              <hr/>
+              <li><%= link_to 'Logout', logout_path, method: :delete, class: 'dropdown-item'%></li>
+            </ul>
+          </li>
+      <% else %>
+          <li><%= link_to 'Articles', articles_path, class: 'nav-link' %></li>
+          <li><%= link_to 'Login', login_path, class: 'nav-link'%></li>
+          <li><%= link_to 'Sign Up', signup_path, class: 'nav-link' %></li>
+      <% end %>
       </ul>
-      <div class='d-flex'>
-        <%= link_to 'Login', login_path, class: 'nav-link btn btn-primary m-1', type: 'button' %>
-        <%= link_to 'Logout', logout_path, method: :delete, class: 'nav-link btn btn-primary m-1', type: 'button' %>
-      </div>
     </div>
   </div>
 </nav>
