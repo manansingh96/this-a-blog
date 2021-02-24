@@ -6,8 +6,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to 'Articles', articles_path, class: 'nav-link' %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Articles
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'Article Listings', articles_path, class: 'dropdown-item' %>
+            <%= link_to 'Create New Article', new_article_path, class: 'dropdown-item' %>
+          </ul>
         </li>
         <li class="nav-item">
           <%= link_to 'About', about_path, class: 'nav-link' %>
