@@ -4,8 +4,28 @@
 class UsersController < ApplicationController
 
   # before_action :set_user, only
+
+  def show
+    set_user
+    @articles = @user.articles
+  end
+
   def new
     @user = User.new
+  end
+
+  def edit
+    set_user
+  end
+
+  def update
+    set_user
+    if @user.update(user_params)
+      flash[:notice] = 'Account details updated'
+      redirect_to articles_path
+    else
+      render 'edit'
+    end
   end
 
   def create
@@ -21,10 +41,10 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @article = Article.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:username, :email_id, :password_digest)
+    params.require(:user).permit(:username, :email_id, :password)
   end
 end
