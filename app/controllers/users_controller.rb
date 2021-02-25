@@ -19,7 +19,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit; end
+  def edit
+    return unless @user != current_user
+
+    flash[:alert] = 'You can only edit your own account.'
+    redirect_to @user
+  end
 
   def update
     if @user.update(user_params)
@@ -63,9 +68,9 @@ class UsersController < ApplicationController
   end
 
   def account_owner?
-    if current_user != @user && !current_user.admin?
-      flash[:notice] = 'You can only perform this action on your own account.'
-      redirect_to @user
-    end
+    return if current_user == @user || current_user.admin?
+
+    flash[:alert] = 'You can only perform this action on your own account.'
+    redirect_to @user
   end
 end
