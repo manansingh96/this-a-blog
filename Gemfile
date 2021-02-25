@@ -56,6 +56,10 @@ group :test do
   gem 'webdrivers'
 end
 
+group :test, :development do
+  gem 'rspec-rails', '~> 4.0.2'
+end
+
 group :production do
 end
 
